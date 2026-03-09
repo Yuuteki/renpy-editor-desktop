@@ -49,11 +49,11 @@
                         </div>
                         <div class="card">
                             <h3>Ren'Py 集成状态</h3>
-                            <p>第二步暂未接入。</p>
+                            <p>第三步仍未接入运行链路。</p>
                         </div>
                         <div class="card">
                             <h3>开发阶段</h3>
-                            <p>正在搭建编辑器主界面骨架。</p>
+                            <p>已完成项目文件系统桥接。</p>
                         </div>
                     </div>
                 </section>
@@ -63,7 +63,7 @@
                         <h2>角色管理</h2>
                         <button class="toolbar-btn" id="btn-add-character">新增角色</button>
                     </div>
-                
+
                     <div class="panel-block">
                         <div id="character-list" class="simple-list"></div>
                     </div>
@@ -102,35 +102,9 @@
                 <div class="inspector-header">
                     <h2>属性面板</h2>
                 </div>
-            
-                <div class="inspector-body">
-                    <div id="inspector-default">
-                        <p>当前未选中任何对象。</p>
-                        <p>后面这里会显示角色、场景、节点或资源的详细属性。</p>
-                    </div>
-            
-                    <div id="character-inspector" class="hidden">
-                        <h3 style="margin-top:0; margin-bottom:16px;">角色属性</h3>
-            
-                        <div class="form-group">
-                            <label for="char-id">角色 ID</label>
-                            <input id="char-id" type="text" autocomplete="off" spellcheck="false" />
-                        </div>
-            
-                        <div class="form-group">
-                            <label for="char-name">显示名</label>
-                            <input id="char-name" type="text" autocomplete="off" spellcheck="false" />
-                        </div>
-            
-                        <div class="form-group">
-                            <label for="char-color">文字颜色</label>
-                            <input id="char-color" type="text" autocomplete="off" spellcheck="false" />
-                        </div>
-            
-                        <div class="inspector-actions">
-                            <button class="toolbar-btn" id="btn-delete-character">删除角色</button>
-                        </div>
-                    </div>
+                <div class="inspector-body" id="inspector-content">
+                    <p>当前未选中任何对象。</p>
+                    <p>后面这里会显示角色、场景、节点或资源的详细属性。</p>
                 </div>
             </aside>
         </div>

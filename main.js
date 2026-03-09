@@ -1,4 +1,4 @@
-const { app, BrowserWindow, ipcMain, dialog, Menu } = require('electron');
+const { app, BrowserWindow, ipcMain, dialog } = require('electron');
 const path = require('path');
 const fs = require('fs');
 
@@ -10,7 +10,7 @@ function createWindow() {
     minHeight: 700,
     title: "Ren'Py Visual Editor",
     backgroundColor: "#1e1e1e",
-    autoHideMenuBar: true,
+    show: false,
     webPreferences: {
       nodeIntegration: false,
       contextIsolation: true,
@@ -19,9 +19,26 @@ function createWindow() {
   });
 
   win.loadFile(path.join(__dirname, 'renderer', 'index.html'));
-}
 
-Menu.setApplicationMenu(null);
+  win.once('ready-to-show', () => {
+    win.show();
+
+    // 延迟一小下，等窗口真正成为前台窗口后再抢焦点
+    setTimeout(() => {
+      if (!win.isDestroyed()) {
+        win.focus();
+        win.webContents.focus();
+      }
+    }, 80);
+  });
+
+  // 每次窗口重新获得焦点，都把焦点给回渲染页面
+  win.on('focus', () => {
+    if (!win.isDestroyed()) {
+      win.webContents.focus();
+    }
+  });
+}
 
 function createDefaultProject(projectName, baseDir) {
   return {
