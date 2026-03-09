@@ -1,0 +1,15 @@
+{
+  "name": "renpy-editor-desktop",
+  "version": "0.1.0",
+  "description": "A desktop visual editor for Ren'Py projects.",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron ."
+  },
+  "keywords": [],
+  "author": "",
+  "license": "MIT",
+  "devDependencies": {
+    "electron": "^latest"
+  }
+}

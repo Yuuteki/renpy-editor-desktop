@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Ren'Py Visual Editor</title>
+    <link rel="stylesheet" href="./style.css" />
+</head>
+
+<body>
+    <div class="app-shell">
+        <header class="topbar">
+            <div class="topbar-left">
+                <div class="app-logo">R</div>
+                <div class="app-title">
+                    <h1>Ren'Py Visual Editor</h1>
+                    <span>桌面编辑器原型</span>
+                </div>
+            </div>
+
+            <div class="topbar-actions">
+                <button class="toolbar-btn">新建项目</button>
+                <button class="toolbar-btn">打开项目</button>
+                <button class="toolbar-btn">保存</button>
+                <button class="toolbar-btn primary">预览</button>
+            </div>
+        </header>
+
+        <div class="workspace">
+            <aside class="sidebar">
+                <div class="sidebar-section-title">项目导航</div>
+
+                <button class="nav-item active" data-view="dashboard">仪表盘</button>
+                <button class="nav-item" data-view="characters">角色</button>
+                <button class="nav-item" data-view="variables">变量</button>
+                <button class="nav-item" data-view="scenes">场景</button>
+                <button class="nav-item" data-view="assets">资源</button>
+                <button class="nav-item" data-view="export">导出</button>
+            </aside>
+
+            <main class="main-panel">
+                <section class="view active" id="view-dashboard">
+                    <h2>仪表盘</h2>
+                    <div class="card-grid">
+                        <div class="card">
+                            <h3>当前项目</h3>
+                            <p>尚未加载项目。</p>
+                        </div>
+                        <div class="card">
+                            <h3>Ren'Py 集成状态</h3>
+                            <p>第二步暂未接入。</p>
+                        </div>
+                        <div class="card">
+                            <h3>开发阶段</h3>
+                            <p>正在搭建编辑器主界面骨架。</p>
+                        </div>
+                    </div>
+                </section>
+
+                <section class="view" id="view-characters">
+                    <div class="section-header">
+                        <h2>角色管理</h2>
+                        <button class="toolbar-btn" id="btn-add-character">新增角色</button>
+                    </div>
+                
+                    <div class="panel-block">
+                        <div id="character-list" class="simple-list"></div>
+                    </div>
+                </section>
+
+                <section class="view" id="view-variables">
+                    <h2>变量管理</h2>
+                    <div class="panel-block">
+                        <p>这里以后放全局变量、分支变量和默认值设置。</p>
+                    </div>
+                </section>
+
+                <section class="view" id="view-scenes">
+                    <h2>场景编辑</h2>
+                    <div class="panel-block">
+                        <p>这里以后放剧情节点列表和场景流程编辑。</p>
+                    </div>
+                </section>
+
+                <section class="view" id="view-assets">
+                    <h2>资源管理</h2>
+                    <div class="panel-block">
+                        <p>这里以后放背景、立绘、CG、BGM、SE 等资源。</p>
+                    </div>
+                </section>
+
+                <section class="view" id="view-export">
+                    <h2>导出与构建</h2>
+                    <div class="panel-block">
+                        <p>这里以后放导出 Ren'Py 工程和构建发行包。</p>
+                    </div>
+                </section>
+            </main>
+
+            <aside class="inspector">
+                <div class="inspector-header">
+                    <h2>属性面板</h2>
+                </div>
+            
+                <div class="inspector-body">
+                    <div id="inspector-default">
+                        <p>当前未选中任何对象。</p>
+                        <p>后面这里会显示角色、场景、节点或资源的详细属性。</p>
+                    </div>
+            
+                    <div id="character-inspector" class="hidden">
+                        <h3 style="margin-top:0; margin-bottom:16px;">角色属性</h3>
+            
+                        <div class="form-group">
+                            <label for="char-id">角色 ID</label>
+                            <input id="char-id" type="text" autocomplete="off" spellcheck="false" />
+                        </div>
+            
+                        <div class="form-group">
+                            <label for="char-name">显示名</label>
+                            <input id="char-name" type="text" autocomplete="off" spellcheck="false" />
+                        </div>
+            
+                        <div class="form-group">
+                            <label for="char-color">文字颜色</label>
+                            <input id="char-color" type="text" autocomplete="off" spellcheck="false" />
+                        </div>
+            
+                        <div class="inspector-actions">
+                            <button class="toolbar-btn" id="btn-delete-character">删除角色</button>
+                        </div>
+                    </div>
+                </div>
+            </aside>
+        </div>
+
+        <footer class="statusbar">
+            <span>状态：界面骨架已加载</span>
+            <span id="status-view-name">当前页面：仪表盘</span>
+        </footer>
+    </div>
+
+    <script src="./app.js"></script>
+</body>
+
+</html>
