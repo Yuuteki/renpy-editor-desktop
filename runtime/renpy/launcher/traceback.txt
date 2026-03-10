@@ -1,0 +1,39 @@
+﻿I'm sorry, but an uncaught exception occurred.
+
+After initialization, but before game start.
+FileNotFoundError: [Errno 2] No such file or directory: '.\\tmp\\codex-create-test\\game\\.\\tmp\\codex-create-test\\game\\script.rpy'
+
+-- Full Traceback ------------------------------------------------------------
+
+Traceback (most recent call last):
+  File "renpy/bootstrap.py", line 401, in bootstrap
+    renpy.main.main()
+    ~~~~~~~~~~~~~~~^^
+  File "renpy/main.py", line 591, in main
+    run(restart)
+    ~~~^^^^^^^^^
+  File "renpy/main.py", line 92, in run
+    if not renpy.arguments.post_init():
+           ~~~~~~~~~~~~~~~~~~~~~~~~~^^ 
+  File "renpy/arguments.py", line 355, in post_init
+    return commands[command]()
+           ~~~~~~~~~~~~~~~~~^^
+  File "gui7/__init__.py", line 174, in generate_gui_command
+    generate_gui(p)
+    ~~~~~~~~~~~~^^^
+  File "gui7/__init__.py", line 74, in generate_gui
+    CodeGenerator(p).copy_script("script.rpy")
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^
+  File "gui7/code.py", line 398, in copy_script
+    self.write_target(dst)
+    ~~~~~~~~~~~~~~~~~^^^^^
+  File "gui7/code.py", line 266, in write_target
+    with codecs.open(target, "w", "utf-8") as f:
+         ~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^      
+  File "<frozen codecs>", line 918, in open
+FileNotFoundError: [Errno 2] No such file or directory: '.\\tmp\\codex-create-test\\game\\.\\tmp\\codex-create-test\\game\\script.rpy'
+
+Windows-11-10.0.26300-SP0 AMD64
+Ren'Py 8.5.2.26010301
+Ren'Py Launcher 8.5.2.26010301
+Tue Mar 10 23:21:06 2026
