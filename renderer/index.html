@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="zh-CN">
 
 <head>
@@ -15,15 +15,15 @@
                 <div class="app-logo">R</div>
                 <div class="app-title">
                     <h1>Ren'Py Visual Editor</h1>
-                    <span>桌面编辑器原型</span>
+                    <span>桌面可视化编辑器</span>
                 </div>
             </div>
 
             <div class="topbar-actions">
-                <button class="toolbar-btn">新建项目</button>
-                <button class="toolbar-btn">打开项目</button>
-                <button class="toolbar-btn">保存</button>
-                <button class="toolbar-btn primary">预览</button>
+                <button class="toolbar-btn" data-action="create-project">新建项目</button>
+                <button class="toolbar-btn" data-action="open-project">打开项目</button>
+                <button class="toolbar-btn" data-action="save-project">保存</button>
+                <button class="toolbar-btn primary" data-action="preview-project">预览</button>
             </div>
         </header>
 
@@ -31,7 +31,7 @@
             <aside class="sidebar">
                 <div class="sidebar-section-title">项目导航</div>
 
-                <button class="nav-item active" data-view="dashboard">仪表盘</button>
+                <button class="nav-item active" data-view="dashboard">编辑页</button>
                 <button class="nav-item" data-view="characters">角色</button>
                 <button class="nav-item" data-view="variables">变量</button>
                 <button class="nav-item" data-view="scenes">场景</button>
@@ -41,19 +41,26 @@
 
             <main class="main-panel">
                 <section class="view active" id="view-dashboard">
-                    <h2>仪表盘</h2>
-                    <div class="card-grid">
-                        <div class="card">
-                            <h3>当前项目</h3>
-                            <p>尚未加载项目。</p>
+                    <div class="section-header section-header-stacked">
+                        <div>
+                            <h2>项目编辑页</h2>
+                            <p class="section-caption">这里是主工作台。先创建或打开一个项目，然后再开始编辑角色、变量和场景。</p>
                         </div>
-                        <div class="card">
-                            <h3>Ren'Py 集成状态</h3>
-                            <p>第三步仍未接入运行链路。</p>
+                        <div class="inline-actions">
+                            <button class="toolbar-btn" id="dashboard-create-project">新建项目</button>
+                            <button class="toolbar-btn" id="dashboard-open-project">打开项目</button>
                         </div>
-                        <div class="card">
-                            <h3>开发阶段</h3>
-                            <p>已完成项目文件系统桥接。</p>
+                    </div>
+
+                    <div class="editor-empty-state">
+                        <div class="card editor-panel">
+                            <h3>现在可以做什么</h3>
+                            <p>创建项目目录，自动生成 <code>project.json</code> 和基础资源文件夹。</p>
+                            <p>打开已有项目后，这里会切换成真正的主编辑页面。</p>
+                        </div>
+                        <div class="card editor-panel">
+                            <h3>下一步编辑流</h3>
+                            <p>先设置项目名称和分辨率，再补角色与变量，最后继续完成场景、资源和导出。</p>
                         </div>
                     </div>
                 </section>
@@ -70,30 +77,47 @@
                 </section>
 
                 <section class="view" id="view-variables">
-                    <h2>变量管理</h2>
+                    <div class="section-header">
+                        <h2>变量管理</h2>
+                        <button class="toolbar-btn" id="btn-add-variable">新增变量</button>
+                    </div>
+
                     <div class="panel-block">
-                        <p>这里以后放全局变量、分支变量和默认值设置。</p>
+                        <div id="variable-list" class="simple-list"></div>
                     </div>
                 </section>
 
                 <section class="view" id="view-scenes">
-                    <h2>场景编辑</h2>
+                    <div class="section-header">
+                        <h2>场景编辑</h2>
+                        <button class="toolbar-btn" id="btn-add-scene">新增场景</button>
+                    </div>
                     <div class="panel-block">
-                        <p>这里以后放剧情节点列表和场景流程编辑。</p>
+                        <div id="scene-list" class="simple-list"></div>
+                    </div>
+                    <div class="panel-block top-gap">
+                        <div class="section-header compact-header">
+                            <h3>剧情节点</h3>
+                            <button class="toolbar-btn" id="btn-add-scene-node-inline">新增节点</button>
+                        </div>
+                        <div id="scene-node-list" class="simple-list"></div>
                     </div>
                 </section>
 
                 <section class="view" id="view-assets">
-                    <h2>资源管理</h2>
+                    <div class="section-header">
+                        <h2>资源管理</h2>
+                        <button class="toolbar-btn" id="btn-add-asset">新增资源</button>
+                    </div>
                     <div class="panel-block">
-                        <p>这里以后放背景、立绘、CG、BGM、SE 等资源。</p>
+                        <div id="asset-list" class="simple-list"></div>
                     </div>
                 </section>
 
                 <section class="view" id="view-export">
                     <h2>导出与构建</h2>
                     <div class="panel-block">
-                        <p>这里以后放导出 Ren'Py 工程和构建发行包。</p>
+                        <p>这里将用于导出 Ren'Py 工程、执行构建并生成发布包。</p>
                     </div>
                 </section>
             </main>
@@ -103,15 +127,15 @@
                     <h2>属性面板</h2>
                 </div>
                 <div class="inspector-body" id="inspector-content">
-                    <p>当前未选中任何对象。</p>
-                    <p>后面这里会显示角色、场景、节点或资源的详细属性。</p>
+                    <p>这里现在是主编辑页。</p>
+                    <p>中间区域集中放项目设置、角色速览、变量速览和模块跳转。需要细节编辑时，再进入角色页或变量页。</p>
                 </div>
             </aside>
         </div>
 
         <footer class="statusbar">
-            <span>状态：界面骨架已加载</span>
-            <span id="status-view-name">当前页面：仪表盘</span>
+            <span>状态：主编辑页已加载</span>
+            <span id="status-view-name">当前页面：编辑页</span>
         </footer>
     </div>
 
